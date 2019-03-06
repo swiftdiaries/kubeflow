@@ -46,20 +46,14 @@ auth:
 
 # Run go fmt against code
 fmt:
-	@$(GO) fmt ./pkg/apis/apps/client/... ./pkg/apis/apps/gcp/... ./pkg/utils/... ./pkg/client/minikube ./pkg/client/gcp/... ./cmd/kfctl/...
+	$(GO) fmt ./pkg/... ./cmd/... ./config/...
 
 # Run go vet against code
 vet:
-	@$(GO) vet ./pkg/apis/apps/client/... ./pkg/apis/apps/gcp/... ./pkg/utils/... ./pkg/client/minikube ./pkg/client/gcp/... ./cmd/kfctl/...
+	$(GO) vet ./pkg/... ./cmd/... ./config/...
 
 generate:
-	@$(GO) generate ./pkg/apis/apps/client/... ./pkg/apis/apps/gcp/... ./pkg/utils/... ./pkg/client/minikube ./pkg/client/gcp/... ./cmd/kfctl/...
-
-$(GOPATH)/bin/deepcopy-gen:
-	GO111MODULE=off $(GO) get k8s.io/code-generator/cmd/deepcopy-gen
-
-pkg/apis/apps/gcp/v1alpha1/zz_generated.deepcopy.go: pkg/apis/apps/gcp/v1alpha1/application_types.go
-	$(GOPATH)/bin/deepcopy-gen -i github.com/kubeflow/kubeflow/bootstrap/pkg/apis/apps/gcp/... -O zz_generated.deepcopy
+	$(GO) generate ./pkg/... ./cmd/... ./config/...
 
 pkg/apis/apps/ksonnet/v1alpha1/zz_generated.deepcopy.go: pkg/apis/apps/ksonnet/v1alpha1/application_types.go
 	$(GOPATH)/bin/deepcopy-gen -i github.com/kubeflow/kubeflow/bootstrap/pkg/apis/apps/ksonnet/... -O zz_generated.deepcopy
