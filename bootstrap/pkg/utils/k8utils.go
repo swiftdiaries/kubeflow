@@ -205,6 +205,13 @@ func RunKubectlApply(filename string) error {
 	return cmd.Run()
 }
 
+// Used by kfctl kustomize to delete created resources
+func RunKubectlDelete(filename string) error {
+	cmd := exec.Command("kubectl", "delete", "-f", filename)
+	cmd.Stdout = os.Stdout
+	return cmd.Run()
+}
+
 // CreateResourceFromFile creates resources from a file, just like `kubectl create -f filename`
 // We use some libraries in an old way (e.g. the RestMapper is in discovery instead of restmapper)
 // because ksonnet (one of our dependency) is using the old library version.

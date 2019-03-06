@@ -117,11 +117,11 @@ func GetKfApp(options map[string]interface{}) kftypes.KfApp {
 }
 
 func (kustomize *kustomize) Apply(resources kftypes.ResourceEnum, options map[string]interface{}) error {
-	return nil
+	return kfctlutils.RunKubectlApply(kustomize.outputFile)
 }
 
 func (kustomize *kustomize) Delete(resources kftypes.ResourceEnum, options map[string]interface{}) error {
-	return nil
+	return kfctlutils.RunKubectlDelete(kustomize.outputFile)
 }
 
 func (kustomize *kustomize) generate(options map[string]interface{}) error {
