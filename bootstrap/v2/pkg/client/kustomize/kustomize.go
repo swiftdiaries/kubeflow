@@ -21,6 +21,7 @@ import (
 	"github.com/ghodss/yaml"
 	gogetter "github.com/hashicorp/go-getter"
 	kftypes "github.com/kubeflow/kubeflow/bootstrap/pkg/apis/apps"
+	kfctlutils "github.com/kubeflow/kubeflow/bootstrap/pkg/utils"
 	cltypes "github.com/kubeflow/kubeflow/bootstrap/v2/pkg/apis/apps/client/v1alpha1"
 	log "github.com/sirupsen/logrus"
 	"io/ioutil"
@@ -118,11 +119,11 @@ func GetKfApp(options map[string]interface{}) kftypes.KfApp {
 }
 
 func (kustomize *kustomize) Apply(resources kftypes.ResourceEnum, options map[string]interface{}) error {
-	return nil
+	return kfctlutils.RunKubectlApply(kustomize.outputFile)
 }
 
 func (kustomize *kustomize) Delete(resources kftypes.ResourceEnum, options map[string]interface{}) error {
-	return nil
+	return kfctlutils.RunKubectlDelete(kustomize.outputFile)
 }
 
 func (kustomize *kustomize) generate(options map[string]interface{}) error {
